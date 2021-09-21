@@ -4,10 +4,13 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.josejunior.calculadoradeimc.databinding.ActivityMainBinding
 import kotlin.math.roundToInt
+import java.text.DecimalFormat
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    val dec = DecimalFormat("#,###.00")
+
 
     fun Conversao(p: String, a:String):Double{
         var peso:Double = p.toDouble()
@@ -36,9 +39,9 @@ class MainActivity : AppCompatActivity() {
             else{
 
                 var resultado: Double = Conversao(binding.txtPeso.text.toString(),binding.txtAltura.text.toString())
-                binding.txvResult.text = "Seu imc é: ${resultado.roundToInt()}"
+                binding.txvResult.text = "Seu imc é: ${dec.format(resultado)}"
 
-                if(resultado < 18){
+                if(resultado < 18.5){
                     binding.txtMensagem.text = "Abaixo do peso"
                 }
                 else if(resultado >= 18 && resultado < 25){
